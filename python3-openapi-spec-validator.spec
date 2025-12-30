@@ -55,9 +55,10 @@ Celem walidatora jest sprawdzanie pełnej zgodności ze specyfikacją.
 %py3_build_pyproject
 
 %if %{with tests}
+# TestRemoteOpenAPIv*Validator and TestRemoteValidate*SpecUrl tests require network
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 PYTEST_PLUGINS=pytest_cov.plugin \
-%{__python3} -m pytest tests
+%{__python3} -m pytest tests -k 'not (TestRemoteOpenAPIv30Validator or TestRemoteOpenAPIv31Validator or TestRemoteValidatev2SpecUrl or TestRemoteValidatev30SpecUrl)'
 %endif
 
 %install
